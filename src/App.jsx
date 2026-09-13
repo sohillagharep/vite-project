@@ -1,40 +1,65 @@
-import React from "react";
-import Hospital from "./componants/static/Hospital"
-import Dash from "./componants/static/Dash"
-import Config from "./componants/static/Config"
-import Logout from "./componants/static/Logout"
-import Login from "./componants/static/Login"
-import Add from "./componants/static/Add"
-import { BrowserRouter, Routes , Route} from "react-router-dom";
+import { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 
+import Navbar from "./componants/Static/Navbar";
 
+import Home from "./componants/Routing/Home";
+import About from "./componants/Routing/About";
+import Skills from "./componants/Routing/Skills";
+import Contact from "./componants/Routing/Contact";
+import Projects from "./componants/Routing/Projects";
+import Education from "./componants/Routing/Education";
 
+export default function App() {
+  const [darkMode, setDarkMode] = useState(true);
 
-export default function App(){
-    return(
+  return (
+    <BrowserRouter>
+      <div
+        className={
+          darkMode
+            ? "bg-dark text-white min-vh-100"
+            : "bg-light text-dark min-vh-100"
+        }
+      >
+        <Navbar
+          darkMode={darkMode}
+          setDarkMode={setDarkMode}
+        />
 
-        <BrowserRouter>
         <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path='/hospital' element={ <Hospital/>} />
-            <Route path='/dash' element={ <Dash/>} />
-            <Route path='/login' element={ <Login/>} />
-            <Route path='/config' element={ <Config/>} />
-            <Route path='/logout' element={ <Logout/>} />
-            <Route path='/add' element={ <Add/>} />
+          <Route
+            path="/"
+            element={<Home darkMode={darkMode} />}
+          />
 
+          <Route
+            path="/about"
+            element={<About darkMode={darkMode} />}
+          />
 
+          <Route
+            path="/education"
+            element={<Education darkMode={darkMode} />}
+          />
+
+          <Route
+            path="/skills"
+            element={<Skills darkMode={darkMode} />}
+          />
+
+          <Route
+            path="/projects"
+            element={<Projects darkMode={darkMode} />}
+          />
+
+          <Route
+            path="/contact"
+            element={<Contact darkMode={darkMode} />}
+          />
         </Routes>
-            
-        </BrowserRouter>
- 
-             
-            
-
-         
-    
-           
-
-        
-    );
+      </div>
+    </BrowserRouter>
+  );
 }
